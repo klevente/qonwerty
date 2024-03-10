@@ -5,7 +5,6 @@ import { RotateCcw } from "lucide-react";
 
 interface Unit {
   name: string;
-  placeholder: string;
   default: number;
 }
 
@@ -51,7 +50,7 @@ export const ConvertWidget: React.FC<ConvertWidgetProps> = ({
         <Input
           ref={unitARef}
           type="number"
-          placeholder={unitA.placeholder}
+          placeholder={unitA.name}
           value={unitAValue}
           onChange={handleUnitAChange}
           className="w-16"
@@ -62,7 +61,7 @@ export const ConvertWidget: React.FC<ConvertWidgetProps> = ({
       <div className="flex items-center gap-2">
         <Input
           type="number"
-          placeholder={unitB.placeholder}
+          placeholder={unitB.name}
           value={unitBValue}
           onChange={handleUnitBChange}
           className="w-16"

@@ -32,13 +32,11 @@ function App() {
       <ThemeToggle />
       <ConvertWidget
         unitA={{
-          name: "C",
-          placeholder: "°C",
+          name: "°C",
           default: 20,
         }}
         unitB={{
-          name: "F",
-          placeholder: "°F",
+          name: "°F",
           default: celsiusToFahrenheit(20),
         }}
         convertAtoB={celsiusToFahrenheit}
@@ -48,12 +46,10 @@ function App() {
       <ConvertWidget
         unitA={{
           name: "kg",
-          placeholder: "kg",
           default: 100,
         }}
         unitB={{
           name: "lbs",
-          placeholder: "lbs",
           default: kgToLbs(100),
         }}
         convertAtoB={kgToLbs}
@@ -63,12 +59,10 @@ function App() {
       <ConvertWidget
         unitA={{
           name: "km/h",
-          placeholder: "km/h",
           default: 90,
         }}
         unitB={{
           name: "mph",
-          placeholder: "mph",
           default: kmhToMph(90),
         }}
         convertAtoB={kmhToMph}
