@@ -30,46 +30,56 @@ function kmhToMph(kmh: number): number {
 
 export const App: FC = () => {
   return (
-    <div className="max-w-xl m-auto mt-10">
-      <ThemeToggle />
-      <ConvertWidget
-        unitA={{
-          name: "°C",
-          default: 20,
-        }}
-        unitB={{
-          name: "°F",
-          default: celsiusToFahrenheit(20),
-        }}
-        convertAtoB={celsiusToFahrenheit}
-        convertBtoA={fahrenheitToCelsius}
-      />
-      <Separator className="my-4" />
-      <ConvertWidget
-        unitA={{
-          name: "kg",
-          default: 100,
-        }}
-        unitB={{
-          name: "lbs",
-          default: kgToLbs(100),
-        }}
-        convertAtoB={kgToLbs}
-        convertBtoA={lbsToKg}
-      />
-      <Separator className="my-4" />
-      <ConvertWidget
-        unitA={{
-          name: "km/h",
-          default: 90,
-        }}
-        unitB={{
-          name: "mph",
-          default: kmhToMph(90),
-        }}
-        convertAtoB={kmhToMph}
-        convertBtoA={mphToKmh}
-      />
+    <div className="max-w-xl m-auto mt-10 px-2">
+      <nav className="flex justify-between">
+        <a href="/">
+          <h4 className="flex gap-2 items-center font-serif">
+            <img className="inline w-8 h-8 img-pixelated" src="/favicon.ico" alt="logo" />
+            Qonwerty
+          </h4>
+        </a>
+        <ThemeToggle />
+      </nav>
+      <div className="grid grid-cols-[35%_15%_35%_15%] items-center mt-4">
+        <ConvertWidget
+          unitA={{
+            name: "°C",
+            default: 20,
+          }}
+          unitB={{
+            name: "°F",
+            default: celsiusToFahrenheit(20),
+          }}
+          convertAtoB={celsiusToFahrenheit}
+          convertBtoA={fahrenheitToCelsius}
+        />
+        <Separator className="my-4 col-span-4" />
+        <ConvertWidget
+          unitA={{
+            name: "kg",
+            default: 100,
+          }}
+          unitB={{
+            name: "lbs",
+            default: kgToLbs(100),
+          }}
+          convertAtoB={kgToLbs}
+          convertBtoA={lbsToKg}
+        />
+        <Separator className="my-4 col-span-4" />
+        <ConvertWidget
+          unitA={{
+            name: "km/h",
+            default: 90,
+          }}
+          unitB={{
+            name: "mph",
+            default: kmhToMph(90),
+          }}
+          convertAtoB={kmhToMph}
+          convertBtoA={mphToKmh}
+        />
+      </div>
     </div>
   );
 };

@@ -45,7 +45,7 @@ export const ConvertWidget: FC<ConvertWidgetProps> = ({
     unitARef.current?.focus();
   };
   return (
-    <div className="flex gap-5 items-center justify-center">
+    <>
       <div className="flex items-center gap-2">
         <Input
           ref={unitARef}
@@ -53,24 +53,24 @@ export const ConvertWidget: FC<ConvertWidgetProps> = ({
           placeholder={unitA.name}
           value={unitAValue}
           onChange={handleUnitAChange}
-          className="w-16"
+          className="w-24 font-mono"
         />
-        <small>{unitA.name}</small>
+        <small className="font-mono">{unitA.name}</small>
       </div>
-      <small>=</small>
+      <small className="justify-self-center md:justify-self-start font-light">=</small>
       <div className="flex items-center gap-2">
         <Input
           type="number"
           placeholder={unitB.name}
           value={unitBValue}
           onChange={handleUnitBChange}
-          className="w-16"
+          className="w-24 font-mono"
         />
-        <small>{unitB.name}</small>
+        <small className="font-mono">{unitB.name}</small>
       </div>
-      <Button onClick={onResetClick} variant="outline" size="icon">
+      <Button className="justify-self-end" onClick={onResetClick} variant="outline" size="icon">
         <RotateCcw className="h-4 w-8" />
       </Button>
-    </div>
+    </>
   );
 };

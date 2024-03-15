@@ -139,3 +139,10 @@
     @apply text-sm text-muted-foreground;
   }
 }
+
+/* Image utilities */
+@layer components {
+  .img-pixelated {
+    image-rendering: pixelated;
+  }
+}
