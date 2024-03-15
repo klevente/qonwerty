@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState, type FC } from "react";
 import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { RotateCcw } from "lucide-react";
@@ -15,7 +15,7 @@ export interface ConvertWidgetProps {
   convertBtoA: (v: number) => number;
 }
 
-export const ConvertWidget: React.FC<ConvertWidgetProps> = ({
+export const ConvertWidget: FC<ConvertWidgetProps> = ({
   unitA,
   unitB,
   convertAtoB,

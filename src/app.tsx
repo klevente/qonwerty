@@ -1,3 +1,5 @@
+import { type FC } from "react";
+
 import { ThemeToggle } from "@/components/theme-toggle.tsx";
 import { ConvertWidget } from "@/components/convert-widget.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
@@ -26,7 +28,7 @@ function kmhToMph(kmh: number): number {
   return +(kmh / 1.60934).toFixed(1);
 }
 
-function App() {
+export const App: FC = () => {
   return (
     <div className="max-w-xl m-auto mt-10">
       <ThemeToggle />
@@ -70,6 +72,4 @@ function App() {
       />
     </div>
   );
-}
-
-export default App;
+};
