@@ -28,6 +28,14 @@ function kmhToMph(kmh: number): number {
   return +(kmh / 1.60934).toFixed(1);
 }
 
+function l100kmToMpg(l100km: number): number {
+  return +(235.214 / l100km).toFixed(1);
+}
+
+function mpgToL100km(mpg: number): number {
+  return +(235.214 / mpg).toFixed(1);
+}
+
 export const App: FC = () => {
   return (
     <div className="max-w-xl m-auto mt-10 px-2">
@@ -78,6 +86,19 @@ export const App: FC = () => {
           }}
           convertAtoB={kmhToMph}
           convertBtoA={mphToKmh}
+        />
+        <Separator className="my-4 col-span-4" />
+        <ConvertWidget
+          unitA={{
+            name: "l/Ckm",
+            default: 8,
+          }}
+          unitB={{
+            name: "mpg",
+            default: l100kmToMpg(8),
+          }}
+          convertAtoB={l100kmToMpg}
+          convertBtoA={mpgToL100km}
         />
       </div>
     </div>
