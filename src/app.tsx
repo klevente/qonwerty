@@ -44,6 +44,14 @@ function sqMToSqFt(sqm: number): number {
   return +(sqm * 10.764).toFixed(1);
 }
 
+function mlToFlOz(ml: number): number {
+  return +(ml * 0.033814).toFixed(1);
+}
+
+function flOzToMl(fluidOunces: number): number {
+  return +(fluidOunces / 0.033814).toFixed(1);
+}
+
 export const App: FC = () => {
   return (
     <div className="max-w-xl m-auto mt-10 px-2">
@@ -120,6 +128,19 @@ export const App: FC = () => {
           }}
           convertAtoB={sqMToSqFt}
           convertBtoA={sqFtToSqM}
+        />
+        <Separator className="my-4 col-span-4" />
+        <ConvertWidget
+          unitA={{
+            name: "ml",
+            default: 1000,
+          }}
+          unitB={{
+            name: "fl oz",
+            default: mlToFlOz(1000),
+          }}
+          convertAtoB={mlToFlOz}
+          convertBtoA={flOzToMl}
         />
       </div>
     </div>
