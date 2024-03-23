@@ -55,7 +55,7 @@ export const ConvertWidget: FC<ConvertWidgetProps> = ({
           onChange={handleUnitAChange}
           className="w-24 font-mono"
         />
-        <small>{unitA.name}</small>
+        <UnitDisplay unitName={unitA.name} />
       </div>
       <small className="justify-self-center md:justify-self-start font-light">=</small>
       <div className="flex items-center gap-2">
@@ -66,11 +66,25 @@ export const ConvertWidget: FC<ConvertWidgetProps> = ({
           onChange={handleUnitBChange}
           className="w-24 font-mono"
         />
-        <small>{unitB.name}</small>
+        <UnitDisplay unitName={unitB.name} />
       </div>
       <Button className="justify-self-end" onClick={onResetClick} variant="outline" size="icon">
         <RotateCcw className="h-4 w-8" />
       </Button>
     </>
+  );
+};
+
+interface UnitDisplayProps {
+  unitName: string;
+}
+
+const UnitDisplay: FC<UnitDisplayProps> = ({ unitName }) => {
+  const [nameBase, nameSup] = unitName.split("^", 2);
+  return (
+    <small>
+      {nameBase}
+      {nameSup && <sup>{nameSup}</sup>}
+    </small>
   );
 };
