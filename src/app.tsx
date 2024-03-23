@@ -36,6 +36,14 @@ function mpgToL100km(mpg: number): number {
   return +(235.214 / mpg).toFixed(1);
 }
 
+function sqFtToSqM(sqft: number): number {
+  return +(sqft / 10.764).toFixed(1);
+}
+
+function sqMToSqFt(sqm: number): number {
+  return +(sqm * 10.764).toFixed(1);
+}
+
 export const App: FC = () => {
   return (
     <div className="max-w-xl m-auto mt-10 px-2">
@@ -99,6 +107,19 @@ export const App: FC = () => {
           }}
           convertAtoB={l100kmToMpg}
           convertBtoA={mpgToL100km}
+        />
+        <Separator className="my-4 col-span-4" />
+        <ConvertWidget
+          unitA={{
+            name: "m^2",
+            default: 100,
+          }}
+          unitB={{
+            name: "ft^2",
+            default: sqMToSqFt(100),
+          }}
+          convertAtoB={sqMToSqFt}
+          convertBtoA={sqFtToSqM}
         />
       </div>
     </div>
