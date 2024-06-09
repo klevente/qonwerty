@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle.tsx";
 import { ConvertWidget } from "@/components/convert-widget.tsx";
@@ -52,6 +52,66 @@ function flOzToMl(fluidOunces: number): number {
   return +(fluidOunces / 0.033814).toFixed(1);
 }
 
+function cupsToMl(cups: number): number {
+  return +(cups * 240).toFixed(1);
+}
+
+function mlToCups(ml: number): number {
+  return +(ml / 240).toFixed(1);
+}
+
+const UNIT_PAIRS = [
+  {
+    unitA: "°C",
+    unitB: "°F",
+    default: 20,
+    aToB: celsiusToFahrenheit,
+    bToA: fahrenheitToCelsius,
+  },
+  {
+    unitA: "kg",
+    unitB: "lbs",
+    default: 100,
+    aToB: kgToLbs,
+    bToA: lbsToKg,
+  },
+  {
+    unitA: "km/h",
+    unitB: "mph",
+    default: 90,
+    aToB: kmhToMph,
+    bToA: mphToKmh,
+  },
+  {
+    unitA: "l/Ckm",
+    unitB: "mpg",
+    default: 8,
+    aToB: l100kmToMpg,
+    bToA: mpgToL100km,
+  },
+  {
+    unitA: "m^2",
+    unitB: "ft^2",
+    default: 100,
+    aToB: sqMToSqFt,
+    bToA: sqFtToSqM,
+  },
+  {
+    unitA: "ml",
+    unitB: "fl oz",
+    default: 1000,
+    aToB: mlToFlOz,
+    bToA: flOzToMl,
+  },
+  {
+    unitA: "cups",
+    unitB: "ml",
+    default: 1,
+    aToB: cupsToMl,
+    bToA: mlToCups,
+  },
+] as const;
+
 export const App: FC = () => {
   return (
     <div className="max-w-xl m-auto mt-10 px-2">
@@ -65,83 +125,19 @@ export const App: FC = () => {
         <ThemeToggle />
       </nav>
       <div className="grid grid-cols-[35%_15%_35%_15%] items-center mt-4">
-        <ConvertWidget
-          unitA={{
-            name: "°C",
-            default: 20,
-          }}
-          unitB={{
-            name: "°F",
-            default: celsiusToFahrenheit(20),
-          }}
-          convertAtoB={celsiusToFahrenheit}
-          convertBtoA={fahrenheitToCelsius}
-        />
-        <Separator className="my-4 col-span-4" />
-        <ConvertWidget
-          unitA={{
-            name: "kg",
-            default: 100,
-          }}
-          unitB={{
-            name: "lbs",
-            default: kgToLbs(100),
-          }}
-          convertAtoB={kgToLbs}
-          convertBtoA={lbsToKg}
-        />
-        <Separator className="my-4 col-span-4" />
-        <ConvertWidget
-          unitA={{
-            name: "km/h",
-            default: 90,
-          }}
-          unitB={{
-            name: "mph",
-            default: kmhToMph(90),
-          }}
-          convertAtoB={kmhToMph}
-          convertBtoA={mphToKmh}
-        />
-        <Separator className="my-4 col-span-4" />
-        <ConvertWidget
-          unitA={{
-            name: "l/Ckm",
-            default: 8,
-          }}
-          unitB={{
-            name: "mpg",
-            default: l100kmToMpg(8),
-          }}
-          convertAtoB={l100kmToMpg}
-          convertBtoA={mpgToL100km}
-        />
-        <Separator className="my-4 col-span-4" />
-        <ConvertWidget
-          unitA={{
-            name: "m^2",
-            default: 100,
-          }}
-          unitB={{
-            name: "ft^2",
-            default: sqMToSqFt(100),
-          }}
-          convertAtoB={sqMToSqFt}
-          convertBtoA={sqFtToSqM}
-        />
-        <Separator className="my-4 col-span-4" />
-        <ConvertWidget
-          unitA={{
-            name: "ml",
-            default: 1000,
-          }}
-          unitB={{
-            name: "fl oz",
-            default: mlToFlOz(1000),
-          }}
-          convertAtoB={mlToFlOz}
-          convertBtoA={flOzToMl}
-        />
+        {UNIT_PAIRS.map((pair, i) => (
+          <>
+            {i > 0 && <Separator key={`sep-${i}`} className="my-4 col-span-4" />}
+            <ConvertWidget
+              key={`conv-${i}`}
+              unitAName={pair.unitA}
+              unitBName={pair.unitB}
+              defaultA={pair.default}
+              convertAtoB={pair.aToB}
+              convertBtoA={pair.bToA}
+            />
+          </>
+        ))}
       </div>
     </div>
   );
