@@ -64,6 +64,14 @@ function mlToCups(ml: number): number {
   return +(ml / 240).toFixed(1);
 }
 
+function ozToGrams(oz: number): number {
+  return +(oz * 28.3495).toFixed(1);
+}
+
+function gramsToOz(g: number): number {
+  return +(g / 28.3495).toFixed(1);
+}
+
 type Tag = "cooking";
 
 interface UnitPair {
@@ -77,48 +85,48 @@ interface UnitPair {
 
 const UNIT_PAIRS = [
   {
-    unitA: "°C",
-    unitB: "°F",
+    unitA: "°F",
+    unitB: "°C",
+    default: 70,
+    aToB: fahrenheitToCelsius,
+    bToA: celsiusToFahrenheit,
+    tags: ["cooking"],
+  },
+  {
+    unitA: "lbs",
+    unitB: "kg",
+    default: 180,
+    aToB: lbsToKg,
+    bToA: kgToLbs,
+    tags: ["cooking"],
+  },
+  {
+    unitA: "mph",
+    unitB: "km/h",
+    default: 55,
+    aToB: mphToKmh,
+    bToA: kmhToMph,
+  },
+  {
+    unitA: "mpg",
+    unitB: "l/Ckm",
     default: 20,
-    aToB: celsiusToFahrenheit,
-    bToA: fahrenheitToCelsius,
-    tags: ["cooking"],
+    aToB: mpgToL100km,
+    bToA: l100kmToMpg,
   },
   {
-    unitA: "kg",
-    unitB: "lbs",
-    default: 100,
-    aToB: kgToLbs,
-    bToA: lbsToKg,
-    tags: ["cooking"],
+    unitA: "ft^2",
+    unitB: "m^2",
+    default: 1800,
+    aToB: sqFtToSqM,
+    bToA: sqMToSqFt,
   },
   {
-    unitA: "km/h",
-    unitB: "mph",
-    default: 90,
-    aToB: kmhToMph,
-    bToA: mphToKmh,
-  },
-  {
-    unitA: "l/Ckm",
-    unitB: "mpg",
+    unitA: "fl oz",
+    unitB: "ml",
     default: 8,
-    aToB: l100kmToMpg,
-    bToA: mpgToL100km,
-  },
-  {
-    unitA: "m^2",
-    unitB: "ft^2",
-    default: 100,
-    aToB: sqMToSqFt,
-    bToA: sqFtToSqM,
-  },
-  {
-    unitA: "ml",
-    unitB: "fl oz",
-    default: 1000,
-    aToB: mlToFlOz,
-    bToA: flOzToMl,
+    aToB: flOzToMl,
+    bToA: mlToFlOz,
     tags: ["cooking"],
   },
   {
@@ -127,6 +135,14 @@ const UNIT_PAIRS = [
     default: 1,
     aToB: cupsToMl,
     bToA: mlToCups,
+    tags: ["cooking"],
+  },
+  {
+    unitA: "oz",
+    unitB: "g",
+    default: 6,
+    aToB: ozToGrams,
+    bToA: gramsToOz,
     tags: ["cooking"],
   },
 ] satisfies UnitPair[];
